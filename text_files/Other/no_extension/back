@@ -1,0 +1,20 @@
+#direcrtory
+#from pathlib import Path
+
+#directory = Path.cwd()
+#def tree(directory):
+#    print(f"{directory}")
+#    for path in sorted(directory.rglob("*")):
+#        depth = len(path.relative_to(directory).parts)
+#        spacer = "  " * depth
+#        print(f"{spacer}+{path.name}")
+#tree(directory)
+# point of this is to derive alreayd exisitng themes and folder structure
+
+#
+#if new_path.exists():
+ #   print(f"ERROR: Destination already exists: {new_path}")
+#else:
+#    md_path.rename(new_path)
+#    print(f"Matched keywords: {physics_keywords}")
+#    print(f"Moved file to: {new_path}")
