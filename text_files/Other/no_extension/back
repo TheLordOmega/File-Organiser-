@@ -18,3 +18,14 @@
 #    md_path.rename(new_path)
 #    print(f"Matched keywords: {physics_keywords}")
 #    print(f"Moved file to: {new_path}")
+#renaming
+md_path = Path.cwd() / text_folder / "list.md"
+content = ""
+if not md_path.exists():
+    print(f"ERROR: Cannot find {md_path}")
+else:
+    # Read list.md itself
+    with md_path.open("r", encoding="utf-8") as md_file:
+        content = md_file.read()
+    # Convert the contents to lowercase
+    content = content.lower()
