@@ -44,3 +44,14 @@ mlp.fit(X_train,y_train)
 
 print("Training set score", mlp.score(X_train, y_train))
 print("testing set score", mlp.score(X_test, y_test))
+
+
+
+
+
+
+index=0
+test_digit= X_test.iloc[index].to_numpy().reshape(1,784)
+test_digit_prediction= mlp.predict(test_digit)[0]
+print("Predicted value",test_digit_prediction)
+print("Actual value",y_test.iloc[index])
