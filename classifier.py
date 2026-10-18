@@ -1,15 +1,35 @@
-from sklearn.datasets import fetch_20newsgroups
-from sklearn.feature_extraction.text import CountVectorizer
 
-categories = ['alt.atheism', 'soc.religion.christian', 'comp.graphics', 'sci.med']
 
-twenty_train = fetch_20newsgroups(subset='train',
-    categories=categories, shuffle=True, random_state=42)
+#perceptrons
+from tkinter.constants import X
 
-count_vect = CountVectorizer()
-X_train_counts = count_vect.fit_transform(twenty_train.data)# type: ignore
-print(X_train_counts.shape) # type: ignore
-from sklearn.feature_extraction.text import TfidfTransformer
-tf_transformer = TfidfTransformer(use_idf=False).fit(X_train_counts)
-X_train_tf = tf_transformer.transform(X_train_counts)
-X_train_tf.shape # type: ignore
+import numpy as np
+import sklearn.datasets as skl_data
+
+
+#a single neuron
+def perceptron (inputs, weights, threshold):
+    assert len(inputs) == len(weights)
+
+    values= np.multiply(inputs,weights)
+
+    total= sum(values)
+
+    if total < threshold:
+        return 0
+    else:
+        return 1
+
+
+#arrays of daya , labels for images and the image data itself
+data, labels= skl_data.fetch_openml('mnist_784', version=1, return_X_y=True)
+print(data.shape)
+data.head()
+data= data / 255.0
+
+
+#from sklearn.model_selection import train_test_split
+
+#X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=.10, random_state=42, stratify=labels)
+#print(X_train.shape)
+#print(X_test.shape)
