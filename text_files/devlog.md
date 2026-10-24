@@ -66,3 +66,17 @@ made topics better
 
 2h40:
 start implementing ai for images and files harder
+
+
+
+did 30 min of the GUI setup
+
+
+built a pdf extractor tool that extracts the text from pdf and saves it to a md file
+
+i then made a script that remove all teh unnesary sapces from said markdown or any markdown in general
+
+plans for next :
+combine all these scripts into a single organise
+and start the training data
+make the space saving also work for making it a specific template

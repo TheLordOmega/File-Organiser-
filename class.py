@@ -1,6 +1,5 @@
 #actual ai code till now
 
-
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
@@ -27,7 +26,7 @@ for file in directory.iterdir():
 
 
 labels = [
-
+"Mathematics", "Chemistry", "Material science", "Engineering practice 1"
 
 ]
 

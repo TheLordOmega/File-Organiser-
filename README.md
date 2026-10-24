@@ -23,3 +23,13 @@ make a template maker into it
 Make the UI
 let me pick the directory through the GUI
 BONUS : turn it into an app
+
+
+sources used: 
+
+https://realpython.com/python-pathlib/
+https://pypdf.readthedocs.io/en/latest/user/extract-text.html?utm_source=chatgpt.com
+https://scikit-learn.org/1.3/tutorial/text_analytics/working_with_text_data.html?utm_source=chatgpt.com
+https://uw-madison-datascience.github.io/2022-10-26-machine-learning-novice-sklearn/06-neural-networks/index.html
+https://techyorker.com/text-classification-explained-step-by-step-from-labeled-data-to-a-working-model/?utm_source=chatgpt.com
+https://customtkinter.tomschimansky.com/tutorial/grid-system/
