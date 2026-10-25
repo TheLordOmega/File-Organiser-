@@ -36,6 +36,53 @@ class CustomTitleBar(QWidget):
         self.min_button.setIcon(min_icon)
         self.min_button.clicked.connect(self.window().showMinimized)
 
+        self.max_button = QToolButton(self)
+        min_icon = self.style().standardIcon(
+            QStyle.StandardPixmap.SP_TitleBarMaxButton
+        )
+        self.max_button.setIcon(min_icon)
+        self.max_button.clicked.connect(self.window().showMaximized)
+
+        self.close_button = QToolButton(self)
+        min_icon = self.style().standardIcon(
+            QStyle.StandardPixmap.SP_TitleBarCloseButton
+        )
+        self.close_button.setIcon(min_icon)
+        self.close_button.clicked.connect(self.window().close)
+
+                # Normal button
+        self.normal_button = QToolButton(self)
+        normal_icon = self.style().standardIcon(
+                QStyle.StandardPixmap.SP_TitleBarNormalButton
+            )
+        self.normal_button.setIcon(normal_icon)
+        self.normal_button.clicked.connect(self.window().showNormal)
+        self.normal_button.setVisible(False)
+
+
+        #look of the buttons
+
+        buttons = [
+            self.min_button,
+            self.max_button,
+            self.close_button,
+            self.normal_button,
+
+        ]
+        for button in buttons:
+            button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+            button.setFixedSize(QSize(28,28))
+            button.setStyleSheet(
+                """QToolButton{
+                        border:2px solid white;
+                        border_radius: 12 px;
+                }
+                """
+            )
+            titlela.addWidget(button)
+
+
+
 
 
 
