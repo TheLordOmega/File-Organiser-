@@ -25,6 +25,24 @@ class CustomTitleBar(QWidget):
         titlela.setSpacing(2)
 
 
+        #label
+        #
+        self.title = QLabel(f"{self.__class__.__name__}", self)
+        self.title.setStyleSheet(
+            """QLabel {
+                   font-weight: bold;
+                   border: 2px solid black;
+                   border-radius: 12px;
+                   margin: 2px;
+                }
+            """
+        )
+        self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        if title:= parent.windowTitle():
+            self.title.setText(title)
+        titlela.addWidget(self.title)
+
+
 
 
         #top bar buttons
