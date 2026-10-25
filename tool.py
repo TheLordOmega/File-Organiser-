@@ -16,12 +16,20 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("toolbar")
 
         toolbar = QToolBar("Options")
+        toolbar.setIconSize(QSize(16,16))
         self.addToolBar(toolbar)
 
-        button_action = QAction("Settings", self)
+        button_action = QAction(QIcon("settings.png"), "Settings", self)
         button_action.setStatusTip("this is button")
         button_action.triggered.connect(self.toolbar_button_clicked)
+        button_action.setCheckable(True)
         toolbar.addAction(button_action)
+
+
+        self.setStatusBar(QStatusBar(self))
+
+
+
     def toolbar_button_clicked(self, s):
         print("click", s)
 
