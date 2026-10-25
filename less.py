@@ -99,6 +99,20 @@ class CustomTitleBar(QWidget):
             )
             titlela.addWidget(button)
 
+            def window_state_changed(self,state):
+                if state == Qt.WindowState.WindowMaximized:
+                    self.normal_button.setvisible(True)
+                    self.max_button.setVisible(False)
+                else:
+                    self.normal_button.setvisible(True)
+                    self.max_button.setVisible(False)
+            def mousePressEvent(self,event):
+                if event.button()== Qt.MouseButton.LeftButton:
+                    self.initial_pos = event.position().toPoint()
+                    super().mousePressEvent(event)
+                    event.accept()
+
+
 
 
 
