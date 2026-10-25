@@ -18,26 +18,23 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("File Organiser")
-
         self.label = QLabel()
-        self.input = QLineEdit()
-        self.input.textChanged.connect(self.label.setText)
-
-
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.input)
-        layout.addWidget(self.label)
-
-        container = QWidget()
-        container.setLayout(layout)
-
 
         self.button = QPushButton("Organise Directory")
         self.button.setCheckable(True)
         self.button.clicked.connect(self.button_clicked)
         self.button.clicked.connect(self.button_checked)
         self.resize(900, 600)
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.label)
+        layout.addWidget(self.button)
+
+
+        container = QWidget()
+        container.setLayout(layout)
+
+
         #central widget is button
         self.setCentralWidget(container)
     def button_clicked(self):
