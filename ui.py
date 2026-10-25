@@ -1,10 +1,7 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget
-
 import sys
 
-
-
-
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
 
 #code to customise the main window
 
@@ -13,14 +10,14 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("File Organiser")
-        button = QpushButton("Organise Directory")
-
+        button = QPushButton("Organise Directory")
+        self.setBaseSize(QSize(900,600))
         #central widget is button
         self.setCentralWidget(button)
 
 
 app= QApplication(sys.argv)
-window= QMainWindow() #creates the window and shows it
+window= MainWindow() #creates the window and shows it
 window.show()
 
 #starts the app
