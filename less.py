@@ -1,15 +1,46 @@
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QMainWindow
-
+from PyQt6.QtCore import QSize, Qt
+from PyQt6.QtGui import QPalette
+from PyQt6.QtWidgets import (
+    QApplication,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QStyle,
+    QToolButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        super().__init__()
         self.setWindowTitle("File Organiser")
         self.resize(900,800)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
 
+        central_widget = QWidget()
+        self.title_bar = CustomTitleBar(self)
 
-app= QApplication
-window = MainWindow
+        layout = QVBoxLayout()
+        layout.setContentsMargins(11,11,11,11)
+        layout.addWidget(QLabel("hello world", self))
+
+
+        #central widget layout
+        cw_l = QVBoxLayout()
+        cw_l.setAlignment(Qt.AlignmentFlag.AlignTop)
+        cw_l.addWidget(self.title_bar)
+        cw_l.addLayout(layout)
+
+        central_widget.setLayout(cw_l)
+        self.setCentralWidget(central_widget)
+
+
+
+
+
+
+app= QApplication()
+window = MainWindow()
 window.show()
 app.exec()
