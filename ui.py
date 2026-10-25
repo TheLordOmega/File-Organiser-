@@ -10,12 +10,16 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("File Organiser")
+
+
         button = QPushButton("Organise Directory")
-        self.setBaseSize(QSize(900,600))
+        button.setCheckable(True)
+        button.clicked.connect(self.button_clicked)
+        self.resize(900, 600)
         #central widget is button
         self.setCentralWidget(button)
-
-
+    def button_clicked(self):
+        print("clicked!")
 app= QApplication(sys.argv)
 window= MainWindow() #creates the window and shows it
 window.show()
