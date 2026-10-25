@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(label)
         #image
         label= QLabel()
-        label.setPixmap(QPicmap("image.png"))
+        label.setPixmap(QPixmap("image.png"))
 
 
 
