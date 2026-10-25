@@ -1,23 +1,23 @@
 import sys
 from pathlib import Path
+
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtGui import QAction, QIcon, QPalette,
+from PySide6.QtGui import QAction, QIcon, QPalette
 from PySide6.QtWidgets import (
     QApplication,
+    QHBoxLayout,
     QLabel,
     QMainWindow,
     QMenu,
     QPushButton,
-    QVBoxLayout,
-    QWidget,
-    QHBoxLayout,
     QStyle,
     QToolButton,
-
+    QVBoxLayout,
+    QWidget,
 )
 
-#code to customise the main window
 
+#code to customise the titlebar
 class CustomTitleBar(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
@@ -126,7 +126,7 @@ class CustomTitleBar(QWidget):
         super().mousePressEvent(event)
 
 
-
+#code to customise the main window
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
