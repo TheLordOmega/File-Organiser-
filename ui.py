@@ -45,7 +45,10 @@ class MainWindow(QMainWindow):
         self.button.setEnabled(False)
         self.setWindowTitle("Done!")
 
-
+#######mouse presses tracking
+    def mousePressEvent(self, e):
+        if e.button() == Qt.MouseButton.RightButton:
+            self.label.setText("left clicked")
 
     def button_checked(self, checked):
         button_status = checked
