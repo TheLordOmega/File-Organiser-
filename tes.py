@@ -17,11 +17,14 @@ from PySide6.QtWidgets import (
 )
 
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("app")
+
+        #label
         label= QLabel("Hello")
         label.setText("hey")
         font = label.font()
@@ -31,6 +34,14 @@ class MainWindow(QMainWindow):
             Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter
         )
         self.setCentralWidget(label)
+        #image
+        label= QLabel()
+        label.setPixmap(QPicmap("image.png"))
+
+
+
+
+
 
 
 
