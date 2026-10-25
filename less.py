@@ -44,7 +44,6 @@ class CustomTitleBar(QWidget):
         )
 
         titlela.addWidget(self.title, 1)
-
         # Minimize button
         self.min_button = QToolButton(self)
         min_icon = QIcon()
@@ -84,16 +83,17 @@ class CustomTitleBar(QWidget):
 
         for button in buttons:
             button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-            button.setFixedSize(QSize(28, 28))
-            button.setStyleSheet("""
-                QToolButton {
-                    border: 2px solid white;
-                    border-radius: 12px;
-                }
-                QToolButton:hover {
-                    background-color: #555555;
-                }
-            """)
+            button.setFixedSize(QSize(16,16))
+            button.setStyleSheet(
+                """QToolButton{
+                        border:none;
+                        padding: 2px;
+                        }
+                        QToolButton:hover {
+                        background-color: #555555;
+                            }
+                            """
+            )
             titlela.addWidget(button)
 
     def toggle_maximize(self):
