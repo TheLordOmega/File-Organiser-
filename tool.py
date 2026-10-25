@@ -26,7 +26,30 @@ class MainWindow(QMainWindow):
         toolbar.addAction(button_action)
 
 
+        toolbar.addSeparator()
+
+        button2 = QAction(QIcon("2.png"), "2", self)
+        button2.setStatusTip("second button")
+        button2.triggered.connect(self.toolbar_button_clicked)
+        button2.setCheckable(True)
+        toolbar.addAction(button2)
+
+        toolbar.addWidget(QLabel("Hello"))
+        toolbar.addWidget(QCheckBox())
+
+
         self.setStatusBar(QStatusBar(self))
+
+
+        menu = self.menuBar()
+        file_menu = menu.addMenu("&File")
+        file_menu.addAction(button_action)
+        file_menu.addSeparator()
+        file_menu.addAction(button2)
+
+        file_submenu = file_menu.addMenu("submenu")
+        file_submenu.addAction(button2)
+
 
 
 
