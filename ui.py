@@ -1,7 +1,15 @@
 import sys
 
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
+from PySide6.QtWidgets import (
+    QApplication,
+    QLabel,
+    QLineEdit,
+    QMainWindow,
+    QPushButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 #code to customise the main window
 
@@ -11,6 +19,19 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("File Organiser")
 
+        self.label = QLabel()
+        self.input = QLineEdit()
+        self.input.textChanged.connect(self.label.setText)
+
+
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.input)
+        layout.addWidget(self.label)
+
+        container = QWidget()
+        container.setLayout(layout)
+
 
         self.button = QPushButton("Organise Directory")
         self.button.setCheckable(True)
@@ -18,7 +39,7 @@ class MainWindow(QMainWindow):
         self.button.clicked.connect(self.button_checked)
         self.resize(900, 600)
         #central widget is button
-        self.setCentralWidget(self.button)
+        self.setCentralWidget(container)
     def button_clicked(self):
         print("Already clicked!")
         self.button.setEnabled(False)
