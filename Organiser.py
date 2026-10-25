@@ -1,6 +1,7 @@
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
+from pypdf import PdfReader
 
 ##Inisialisation:
 text_folder = Path("text_files")
@@ -57,3 +58,54 @@ for file in directory.iterdir():
 
 with open(history_file, "a", encoding="utf-8") as f:
     f.write(date.now().strftime("%Y-%m-%d %H:%M") + "\n")
+
+
+
+
+###if its a pdf
+
+
+pdf_path = Path(__file__).parent / "test Orient.pdf"
+md_path = pdf_path.with_suffix(".md")
+
+reader = PdfReader(pdf_path)
+
+markdown = [f"# {pdf_path.stem}\n"]
+
+for page_number, page in enumerate(reader.pages, start=1):
+    text = page.extract_text(extraction_mode="layout")
+
+    if text and text.strip():
+        markdown.append(f"## Page {page_number}\n\n{text.strip()}\n")
+
+md_path.write_text("\n".join(markdown), encoding="utf-8")
+
+print(f"Extracted {len(reader.pages)} pages to: {md_path}")
+
+
+ #clean up lines
+md_path = Path(__file__).parent / "test Orient.md"
+output_path= md_path.with_name(f"{md_path.stem}_clean.md")
+
+text= md_path.read_text(encoding="utf-8")
+
+text= text.replace("\x0c","\n")
+
+lines = [line.strip() for line in text.splitlines()]
+
+cleaned_lines= []
+
+for line in lines:
+    if line:
+        cleaned_lines.append(line)
+    elif cleaned_lines and cleaned_lines[-1] !="":
+        cleaned_lines.append("")
+
+while cleaned_lines and cleaned_lines [-1] == "":
+    cleaned_lines.pop()
+
+output_path.write_text(
+    "\n".join(cleaned_lines)+ "\n",
+    encoding="utf-8"
+)
+print(f"Cleaned Makrdown saved to :{output_path}")
