@@ -1,8 +1,8 @@
 import sys
 
-from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtGui import QPalette
-from PyQt6.QtWidgets import (
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QPalette
+from PySide6.QtWidgets import (
     QApplication,
     QHBoxLayout,
     QLabel,
@@ -23,6 +23,20 @@ class CustomTitleBar(QWidget):
         titlela = QHBoxLayout(self)
         titlela.setContentsMargins(1,1,1,1)
         titlela.setSpacing(2)
+
+
+
+
+        #top bar buttons
+
+        self.min_button = QToolButton(self)
+        min_icon = self.style().standardIcon(
+            QStyle.StandardPixmap.SP_TitleBarMinButton
+        )
+        self.min_button.setIcon(min_icon)
+        self.min_button.clicked.connect(self.window().showMinimized)
+
+
 
 
 class MainWindow(QMainWindow):
