@@ -1,6 +1,6 @@
 import time
 
-from PySide6.QtCore import QTimer
+from PySide6.QtCore import QTimer, Slot, QRunnable, QThreadPool
 from PySide6.QtWidgets import(
     QApplication,
     QLabel,
@@ -42,6 +42,19 @@ class MainWindow(QMainWindow):
     def recurring_timer(self):
         self.counter += 1
         self.label.setText(f"Counter:{self.counter}")
+
+
+class Worker(QRunnable):
+    """Worker thread"""
+
+    @Slot()
+    def run(self):
+        """Your long-running job goes in this method"""
+        print("Thread start")
+        time.sleep(5)
+        print("Thread complete")
+
+
 
 
 app = QApplication()

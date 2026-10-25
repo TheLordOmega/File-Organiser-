@@ -70,3 +70,17 @@ start implementing ai for images and files harder
 
 
 did 30 min of the GUI setup
+
+
+
+
+
+6h30
+
+made most of the ui but separatly:
+made the framless code that makes the actual window looks smart (less.py)
+made the direcotry selector (file.py)
+made the tool.py
+made ui.py for the buttons and othe stuff
+
+made for the multicore performance mult.py

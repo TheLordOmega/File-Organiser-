@@ -1,20 +1,18 @@
-from fileinput import filename
 import sys
+from fileinput import filename
+from pathlib import Path
 
 from PySide6.QtWidgets import (
     QApplication,
-    QGridLayout,
-    QLineEdit,
-    QWidget,
     QFileDialog,
     QGridLayout,
-    QPushButton,
     QLabel,
-    QListWidget
-
+    QLineEdit,
+    QListWidget,
+    QPushButton,
+    QWidget,
 )
 
-from pathlib import Path
 
 class MainWindow(QWidget):
     def __init__(self, *args, **kwargs):
