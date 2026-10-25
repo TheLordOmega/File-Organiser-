@@ -20,12 +20,11 @@ class CustomTitleBar(QWidget):
         super().__init__(parent)
         self.setFixedHeight(36)
 
-        self.setAutoFillBackground(True)
-        self.setBackgroundRole(QPalette.ColorRole.Highlight)
-
+        self.initial_pos = None
         titlela = QHBoxLayout(self)
         titlela.setContentsMargins(1, 1, 1, 1)
         titlela.setSpacing(2)
+        self.title = QLabel(f"{self.__class__.__name__}", self)
 
         # Title label
         self.title = QLabel(parent.windowTitle(), self)
@@ -33,14 +32,16 @@ class CustomTitleBar(QWidget):
         self.title.setAttribute(
             Qt.WidgetAttribute.WA_TransparentForMouseEvents
         )
-        self.title.setStyleSheet("""
+        self.title.setStyleSheet(
+            """
             QLabel {
-                font-weight: bold;
-                border: 2px;
-                border-radius: 12px;
-                margin: 2px;
+            text-transform: uppercase;
+            font-size: 10pt;
+            margin-left: 48px;
+            color: white;
             }
-        """)
+        """
+        )
 
         titlela.addWidget(self.title, 1)
 
