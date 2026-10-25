@@ -1,3 +1,5 @@
+import sys
+
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtGui import QPalette
 from PyQt6.QtWidgets import (
@@ -10,6 +12,18 @@ from PyQt6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
+
+
+class CustomTitleBar(QWidget):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.setAutoFillBackground(True)
+        self.setBackgroundRole(QPalette.ColorRole.Highlight)
+        self.inital_pos = None
+        titlela = QHBoxLayout(self)
+        titlela.setContentsMargins(1,1,1,1)
+        titlela.setSpacing(2)
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -40,7 +54,7 @@ class MainWindow(QMainWindow):
 
 
 
-app= QApplication()
+app= QApplication(sys.argv)
 window = MainWindow()
 window.show()
 app.exec()
