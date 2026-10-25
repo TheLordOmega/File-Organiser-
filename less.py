@@ -137,8 +137,19 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("File Organiser")
         self.resize(900, 800)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
-
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setStyleSheet("background-color:gray; border-radius:10px;")
         central_widget = QWidget()
+
+        central_widget.setObjectName("Container")
+        central_widget.setStyleSheet(
+            """#Container{
+                    background: qlineargradient(x1:0 y1:0, x2:1 y2:1, stop:0 #051c2a stop:1 #44315f);
+                    border-radius: 5px;
+            }
+
+            """
+        )
 
         self.title_bar = CustomTitleBar(self)
 
