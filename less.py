@@ -111,6 +111,20 @@ class CustomTitleBar(QWidget):
                     self.initial_pos = event.position().toPoint()
                     super().mousePressEvent(event)
                     event.accept()
+            def mouseMoveEvent(self,event):
+                if self.initial_pos is not None:
+                    delta= event.position().toPoint() - self.initial_pos
+                    self.window().move(
+                        self.window().x() + delta.x(),
+                        self.window().y() + delta.y(),
+                    )
+                    super().mouseMoveEvent(event)
+                    event.accept()
+
+            def mouseReleaseEvent(self,event):
+                self.inital_pos = None
+                super().mouseReleaseEvent(event)
+                event.accept()
 
 
 
