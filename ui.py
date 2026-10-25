@@ -1,11 +1,13 @@
 import sys
 
 from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (
     QApplication,
     QLabel,
     QLineEdit,
     QMainWindow,
+    QMenu,
     QPushButton,
     QVBoxLayout,
     QWidget,
@@ -17,16 +19,16 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("File Organiser")
-        self.label = QLabel()
+        self.setWindowTitle("File Organiser") #name of window
+        self.label = QLabel()  #makes a label
 
-        self.button = QPushButton("Organise Directory")
+        self.button = QPushButton("Organise Directory") #button with name that is checkable
         self.button.setCheckable(True)
-        self.button.clicked.connect(self.button_clicked)
+        self.button.clicked.connect(self.button_clicked) #connects it to a signal when clicked
         self.button.clicked.connect(self.button_checked)
-        self.resize(900, 600)
+        self.resize(900, 600) #default size
 
-        layout = QVBoxLayout()
+        layout = QVBoxLayout()  #layout maker
         layout.addWidget(self.label)
         layout.addWidget(self.button)
 
@@ -35,21 +37,30 @@ class MainWindow(QMainWindow):
         container.setLayout(layout)
 
 
-        #central widget is button
+        #central widget is container
         self.setCentralWidget(container)
+
+
     def button_clicked(self):
-        print("Already clicked!")
-        self.button.setEnabled(False)
         self.setWindowTitle("Done!")
 
 #######mouse presses tracking
     def mousePressEvent(self, e):
         if e.button() == Qt.MouseButton.RightButton:
             self.label.setText("left clicked")
+        if e.button() == Qt.MouseButton.MiddleButton:
+            self.label.setText("middle clicked")
 
     def button_checked(self, checked):
         button_status = checked
         print(button_status)
+
+    def contextMenuEvent(self, e):
+        context= QMenu(self)
+        context.addAction(QAction("test 1",self))
+        context.addAction(QAction("test 2",self))
+        context.addAction(QAction("test 3",self))
+        context.exec(e.globalPos())
 
 app= QApplication(sys.argv)
 window= MainWindow() #creates the window and shows it
