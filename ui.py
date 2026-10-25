@@ -12,17 +12,17 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("File Organiser")
 
 
-        button = QPushButton("Organise Directory")
-        button.setCheckable(True)
-        button.clicked.connect(self.button_clicked)
-        button.clicked.connect(self.button_checked)
+        self.button = QPushButton("Organise Directory")
+        self.button.setCheckable(True)
+        self.button.clicked.connect(self.button_clicked)
+        self.button.clicked.connect(self.button_checked)
         self.resize(900, 600)
         #central widget is button
-        self.setCentralWidget(button)
+        self.setCentralWidget(self.button)
     def button_clicked(self):
         print("Already clicked!")
         self.button.setEnabled(False)
-        self.button.setWindowTitle("Done!")
+        self.setWindowTitle("Done!")
 
 
 
