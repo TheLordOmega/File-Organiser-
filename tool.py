@@ -18,6 +18,15 @@ class MainWindow(QMainWindow):
         toolbar = QToolBar("Options")
         self.addToolBar(toolbar)
 
+        button_action = QAction("Settings", self)
+        button_action.setStatusTip("this is button")
+        button_action.triggered.connect(self.toolbar_button_clicked)
+        toolbar.addAction(button_action)
+    def toolbar_button_clicked(self, s):
+        print("click", s)
+
+
+
 
 
 app = QApplication([])
