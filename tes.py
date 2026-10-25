@@ -22,6 +22,19 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("app")
+        label= QLabel("Hello")
+        label.setText("hey")
+        font = label.font()
+        font.setPointSize(30)
+        label.setFont(font)
+        label.setAlignment(
+            Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter
+        )
+        self.setCentralWidget(label)
+
+
+
+
 
 
 app= QApplication(sys.argv)
