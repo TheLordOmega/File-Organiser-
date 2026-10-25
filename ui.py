@@ -5,7 +5,6 @@ from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (
     QApplication,
     QLabel,
-    QLineEdit,
     QMainWindow,
     QMenu,
     QPushButton,
@@ -40,6 +39,10 @@ class MainWindow(QMainWindow):
         #central widget is container
         self.setCentralWidget(container)
 
+        #signals for context menu
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.contextMenuEvent)
+
 
     def button_clicked(self):
         self.setWindowTitle("Done!")
@@ -54,13 +57,16 @@ class MainWindow(QMainWindow):
     def button_checked(self, checked):
         button_status = checked
         print(button_status)
-
-    def contextMenuEvent(self, e):
+###makes the context menu with different actions
+    def contextMenuEvent(self, pos):
         context= QMenu(self)
+
+
+
         context.addAction(QAction("test 1",self))
         context.addAction(QAction("test 2",self))
         context.addAction(QAction("test 3",self))
-        context.exec(e.globalPos())
+        context.exec(self.mapToGlobal(pos))
 
 app= QApplication(sys.argv)
 window= MainWindow() #creates the window and shows it
