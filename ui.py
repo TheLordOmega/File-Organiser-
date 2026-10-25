@@ -40,3 +40,24 @@ if __name__=="__main__":
 
     print("window shown")
     app.exec()
+
+
+
+
+
+UI DESIGN:
+
+1)
+buttons
+
+
+
+settings
+
+
+
+sidebar
+
+
+
+tiles like - liquid glass
