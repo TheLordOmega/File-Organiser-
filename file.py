@@ -4,6 +4,7 @@ import sys
 from PySide6.QtWidgets import (
     QApplication,
     QGridLayout,
+    QLineEdit,
     QWidget,
     QFileDialog,
     QGridLayout,
@@ -28,28 +29,39 @@ class MainWindow(QWidget):
 
 
         browsebtn = QPushButton('Browse')
-        browsebtn.clicked.connect(self.open_file_dialog)
+        browsebtn.clicked.connect(self.open_dir_dialog)
+        self.dir_name_edit =    QLineEdit()
 
-        self.file_list= QListWidget(self)
-
-        layout.addWidget(QLabel('Files:'), 0, 0)
-        layout.addWidget(self.file_list, 1,0)
-        layout.addWidget(browsebtn, 2, 0)
+        layout.addWidget(QLabel('Directory:'), 1, 0)
+        layout.addWidget(self.dir_name_edit, 1,1)
+        layout.addWidget(browsebtn, 1,2)
 
 
         self.show()
 
-    def open_file_dialog(self):
-        dialog = QFileDialog(self)
-        dialog.setDirectory(r'C:\images')
-        dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
-        dialog.setNameFilter("Images(*.png)")
-        dialog.setViewMode(QFileDialog.ViewMode.List)
+    def open_dir_dialog(self):
+        dir_name = QFileDialog.getExistingDirectory(self, "Select a Directory")
+        if dir_name:
+            path= Path(dir_name)
+            self.dir_name_edit.setText(str(path))
 
-        if dialog.exec():
-            filenames = dialog.selectedFiles()
-            if filenames:
-                self.file_list.addItems([str(Path(filename)) for filename in filenames])
+
+
+
+
+
+
+ #   def open_file_dialog(self):
+  #      dialog = QFileDialog(self)
+   #     dialog.setDirectory(r'C:\images')
+    #    dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
+     #   dialog.setNameFilter("Images(*.png)")
+      #  dialog.setViewMode(QFileDialog.ViewMode.List)
+#
+ #       if dialog.exec():
+  #          filenames = dialog.selectedFiles()
+   #         if filenames:
+    #            self.file_list.addItems([str(Path(filename)) for filename in filenames])
 
 
 app = QApplication(sys.argv)
