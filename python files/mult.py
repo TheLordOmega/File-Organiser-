@@ -1,3 +1,4 @@
+import code
 import time
 
 from PySide6.QtCore import QTimer, Slot, QRunnable, QThreadPool
@@ -41,8 +42,13 @@ class MainWindow(QMainWindow):
         thread_count = self.threadpool.maxThreadCount()
         print(f"Multithreadinn with maximum {thread_count} threads")
 
+    def execute_this_fn(self):
+        print("Hello!")
+
     def oh_no(self):
-        worker = Worker()
+        worker = Worker(
+            self.execute_this_fn
+        )
         self.threadpool.start(worker)
     def recurring_timer(self):
         self.counter += 1
@@ -50,14 +56,27 @@ class MainWindow(QMainWindow):
 
 
 class Worker(QRunnable):
-    """Worker thread"""
+    """Worker thread.
+
+    Inherits from QRunnable to handler worker thread setup, signals and wrap-up.
+
+    :param callback: The function callback to run on this worker thread.
+                     Supplied args and kwargs will be passed through to the runner.
+    :type callback: function
+    :param args: Arguments to pass to the callback function
+    :param kwargs: Keywords to pass to the callback function
+    """
+    def __init__(self, fn , *args, **kwargs):
+        super().__init__()
+        self.fn = fn
+        self.args = args
+        self.kwargs = kwargs
+
 
     @Slot()
     def run(self):
-        """Your long-running job goes in this method"""
-        print("Thread start")
-        time.sleep(5)
-        print("Thread complete")
+        """Initialise the runner function with passed args, kwargs"""
+        self.fn(*self.args, **self.kwargs)
 
 
 
