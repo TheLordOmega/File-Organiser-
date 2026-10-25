@@ -15,11 +15,21 @@ class MainWindow(QMainWindow):
         button = QPushButton("Organise Directory")
         button.setCheckable(True)
         button.clicked.connect(self.button_clicked)
+        button.clicked.connect(self.button_checked)
         self.resize(900, 600)
         #central widget is button
         self.setCentralWidget(button)
     def button_clicked(self):
-        print("clicked!")
+        print("Already clicked!")
+        self.button.setEnabled(False)
+        self.button.setWindowTitle("Done!")
+
+
+
+    def button_checked(self, checked):
+        button_status = checked
+        print(button_status)
+
 app= QApplication(sys.argv)
 window= MainWindow() #creates the window and shows it
 window.show()
