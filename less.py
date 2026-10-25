@@ -2,7 +2,7 @@
 import sys
 
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtGui import QPalette
+from PySide6.QtGui import QPalette, QIcon
 from PySide6.QtWidgets import (
     QApplication,
     QHBoxLayout,
@@ -47,39 +47,31 @@ class CustomTitleBar(QWidget):
 
         # Minimize button
         self.min_button = QToolButton(self)
-        self.min_button.setIcon(
-            self.style().standardIcon(
-                QStyle.StandardPixmap.SP_TitleBarMinButton
-            )
-        )
+        min_icon = QIcon()
+        min_icon.addFile('min.svg')
+        self.min_button.setIcon(min_icon)
         self.min_button.clicked.connect(self.window().showMinimized)
 
         # Maximize button
         self.max_button = QToolButton(self)
-        self.max_button.setIcon(
-            self.style().standardIcon(
-                QStyle.StandardPixmap.SP_TitleBarMaxButton
-            )
-        )
+        max_icon = QIcon()
+        max_icon.addFile('max.svg')
+        self.max_button.setIcon(max_icon)
         self.max_button.clicked.connect(self.toggle_maximize)
 
         # Restore button
         self.normal_button = QToolButton(self)
-        self.normal_button.setIcon(
-            self.style().standardIcon(
-                QStyle.StandardPixmap.SP_TitleBarNormalButton
-            )
-        )
+        normal_icon = QIcon()
+        normal_icon.addFile('normal.svg')
+        self.normal_button.setIcon(normal_icon)
         self.normal_button.clicked.connect(self.toggle_maximize)
         self.normal_button.setVisible(False)
 
         # Close button
         self.close_button = QToolButton(self)
-        self.close_button.setIcon(
-            self.style().standardIcon(
-                QStyle.StandardPixmap.SP_TitleBarCloseButton
-            )
-        )
+        close_icon = QIcon()
+        close_icon.addFile('close.svg')
+        self.close_button.setIcon(close_icon)
         self.close_button.clicked.connect(self.window().close)
 
         # Configure buttons
