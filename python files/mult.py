@@ -37,8 +37,13 @@ class MainWindow(QMainWindow):
         self.timer.timeout.connect(self.recurring_timer)
         self.timer.start()
 
+        self.threadpool = QThreadPool()
+        thread_count = self.threadpool.maxThreadCount()
+        print(f"Multithreadinn with maximum {thread_count} threads")
+
     def oh_no(self):
-        time.sleep(5)
+        worker = Worker()
+        self.threadpool.start(worker)
     def recurring_timer(self):
         self.counter += 1
         self.label.setText(f"Counter:{self.counter}")
