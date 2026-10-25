@@ -1,8 +1,9 @@
 
 import sys
+from pathlib import Path
 
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtGui import QPalette, QIcon
+from PySide6.QtGui import QIcon, QPalette
 from PySide6.QtWidgets import (
     QApplication,
     QHBoxLayout,
@@ -18,7 +19,7 @@ from PySide6.QtWidgets import (
 class CustomTitleBar(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
-        self.setFixedHeight(36)
+        self.setFixedHeight(50)
 
         self.initial_pos = None
         titlela = QHBoxLayout(self)
