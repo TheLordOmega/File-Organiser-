@@ -131,7 +131,6 @@ class MainWindow(QMainWindow):
         self.resize(900, 800)
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setStyleSheet("background-color:gray; border-radius:10px;")
         central_widget = QWidget()
 
         central_widget.setObjectName("Container")
