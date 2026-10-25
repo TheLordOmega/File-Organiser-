@@ -1,6 +1,5 @@
 from PySide6.QtCore import QSize, Qt
-from PySide6.QtGui import QIcon, QKeySequence
-from PySide6.Qtgui import QAction, QIcon, QKeySequence
+from PySide6.QtGui import QAction, QIcon, QKeySequence
 from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
@@ -9,6 +8,7 @@ from PySide6.QtWidgets import (
     QStatusBar,
     QToolBar,
 )
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
