@@ -1,7 +1,7 @@
 import sys
 from pathlib import Path
 
-from PySide6.QtCore import QSize, Qt
+from PySide6.QtCore import QSize, Qt, QEvent
 from PySide6.QtGui import QAction, QIcon, QPalette
 from PySide6.QtWidgets import (
     QApplication,
@@ -14,6 +14,8 @@ from PySide6.QtWidgets import (
     QToolButton,
     QVBoxLayout,
     QWidget,
+    QButtonGroup,
+    QStackedWidget
 )
 
 
@@ -27,8 +29,6 @@ class CustomTitleBar(QWidget):
         titlela = QHBoxLayout(self)
         titlela.setContentsMargins(1, 1, 1, 1)
         titlela.setSpacing(2)
-        self.title = QLabel(f"{self.__class__.__name__}", self)
-
         # Title label
         self.title = QLabel(parent.windowTitle(), self)
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -85,8 +85,9 @@ class CustomTitleBar(QWidget):
         ]
 
         for button in buttons:
-            button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-            button.setFixedSize(QSize(16,16))
+            button.setIconSize(QSize(14,14))
+            button.setToolTip("Window control")
+            button.setFixedSize(QSize(40,32))
             button.setStyleSheet(
                 """QToolButton{
                         border:none;
@@ -132,13 +133,15 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("File Organiser") #name of window
-        self.label = QLabel()  #makes a label
-
-
 
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        central_widget = QWidget()
+        self.title_bar = CustomTitleBar(self)
+
+
+        page_names =["Clean", "Optimize", "History", "Settings"]
+
+
 
         central_widget.setObjectName("Container")
         central_widget.setStyleSheet(
@@ -150,7 +153,6 @@ class MainWindow(QMainWindow):
             """
         )
 
-        self.title_bar = CustomTitleBar(self)
 
         content_layout = QVBoxLayout()
         content_layout.setContentsMargins(11, 11, 11, 11)
