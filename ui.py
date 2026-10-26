@@ -155,6 +155,15 @@ class MainWindow(QMainWindow):
         self.nav_group = QButtonGroup(self)
         self.nav_group.setExclusive(True)
 
+        for index, name in enumerate(page_name):
+            button = QPushButton(name)
+            button.setObjectName("NavButton")
+            button.setCheckable(True)
+            self.nav_group.addButton(button, index)
+            navila.addWidget(button)
+
+
+
 
 
 
