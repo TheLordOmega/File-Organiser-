@@ -6,9 +6,9 @@ directory = Path.cwd()
 
 text_folder = Path("text_files")
 text_folder.mkdir(exist_ok=True)
-history_file = Path(text_folder /"history.md")
+history_file = text_folder /"history.md"
 
-blacklist= {
+blacklist = {
     "history.md",
     ".wakatime-project",
     "Organiser.py",
@@ -24,6 +24,8 @@ blacklist= {
     "pdf.py",
     "requirements.txt",
     "organizer.log",
+    "ui.py",
+    "README.md",
 }
 
 topics = {
