@@ -11,12 +11,15 @@ from PySide6.QtWidgets import (
     QLabel,
     QMainWindow,
     QMenu,
+    QMessageBox,
     QPushButton,
+    QStackedWidget,
     QToolButton,
     QVBoxLayout,
     QWidget,
-    QStackedWidget,
 )
+
+from scanner import organizer
 
 
 # Code to customise the title bar.
