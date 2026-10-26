@@ -2,15 +2,13 @@ from pathlib import Path
 from datetime import datetime
 
 
-##Inisialisation:
-
 directory = Path.cwd()
 
 text_folder = Path("text_files")
 text_folder.mkdir(exist_ok=True)
 history_file = Path(text_folder /"history.md")
 
-Blacklist= {
+blacklist= {
     "history.md",
     ".wakatime-project",
     "Organiser.py",
