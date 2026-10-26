@@ -155,7 +155,7 @@ class MainWindow(QMainWindow):
         self.nav_group = QButtonGroup(self)
         self.nav_group.setExclusive(True)
 
-        for index, name in enumerate(page_name):
+        for index, name in enumerate(page_names):
             button = QPushButton(name)
             button.setObjectName("NavButton")
             button.setCheckable(True)
@@ -163,32 +163,36 @@ class MainWindow(QMainWindow):
             navila.addWidget(button)
 
 
-    self.pages = QStackedWidget()
-
-    clean_page = QWidget()
-    cleanla = QVBoxLayout(clean_page)
-    cleanla.addWidget(QLabel("File Organiser"))
+        self.pages = QStackedWidget()
 
 
-    self.label = QLabel("choose a folder to start")
-    cleanla.addWidget(self.button)
+        self.button = QPushButton("Organise Directory")
+        self.button.clicked.connect(self.button_clicked)
 
-    self.pages.addWidget(clean_page)
+        clean_page = QWidget()
+        cleanla = QVBoxLayout(clean_page)
+        cleanla.addWidget(QLabel("File Organiser"))
 
-    for name in page_name[1:]:
-        page = QWidget()
-        pagela = QVBoxLayout(page)
-        pagela.addWidget(QLabel(f"{name} later"))
-        self.pages.addWidget(page)
 
-    self.nav_group.idClicked.connect(self.pages.setCurrentIndex)
-    self.nav_group.button(0).setChecked(True)
+        self.label = QLabel("choose a folder to start")
+        cleanla.addWidget(self.button)
+
+        self.pages.addWidget(clean_page)
+
+        for name in page_names[1:]:
+            page = QWidget()
+            pagela = QVBoxLayout(page)
+            pagela.addWidget(QLabel(f"{name} later"))
+            self.pages.addWidget(page)
+
+        self.nav_group.idClicked.connect(self.pages.setCurrentIndex)
+        self.nav_group.button(0).setChecked(True)
 
 
 
         central_widget = QWidget()
         central_widget.setObjectName("Container")
-        central_widget.set(Qt.WidgetAttribute.WA_StyledBackground, True)
+        central_widget.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         central_widget.setStyleSheet(
             """#Container{
                     background: qlineargradient(x1:0 y1:0, x2:1 y2:1, stop:0 #051c2a stop:1 #44315f);
@@ -232,11 +236,10 @@ class MainWindow(QMainWindow):
         self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.customContextMenuRequested.connect(self.contextMenuEvent)
 
-
     def button_clicked(self):
         ##organiser
-
-#######mouse presses tracking
+        print("hello")
+        #######mouse presses tracking
     def mousePressEvent(self, e):
         if e.button() == Qt.MouseButton.RightButton:
             self.label.setText("left clicked")
@@ -246,7 +249,7 @@ class MainWindow(QMainWindow):
     def button_checked(self, checked):
         button_status = checked
         print(button_status)
-###makes the context menu with different actions
+        #   ##makes the context menu with different actions
     def contextMenuEvent(self, pos):
         context= QMenu(self)
 
