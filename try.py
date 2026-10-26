@@ -1,4 +1,4 @@
-from org import classify_text
+from scanner import
 
 examples = [
     "Calculus and algebra revision",
