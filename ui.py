@@ -1,22 +1,24 @@
 import sys
 from pathlib import Path
 
-from PySide6.QtCore import QSize, Qt, QEvent
-from PySide6.QtGui import QAction, QIcon, QPalette
+from PySide6.QtCore import QEvent, QSize, Qt
 from PySide6.QtWidgets import (
     QApplication,
+    QButtonGroup,
+    QFileDialog,
+    QFrame,
     QHBoxLayout,
     QLabel,
     QMainWindow,
     QMenu,
     QPushButton,
-    QStyle,
+    QSizeGrip,
+    QStackedWidget,
     QToolButton,
     QVBoxLayout,
     QWidget,
-    QButtonGroup,
-    QStackedWidget
 )
+
 
 from e import controls_layout
 
