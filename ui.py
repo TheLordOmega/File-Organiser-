@@ -318,7 +318,7 @@ class MainWindow(QMainWindow):
             self.label.setText("Choose a folder first.")
             return
 
-        answer = QMessageBox.quesion(
+        answer = QMessageBox.question(
             self,
             "Organize files",
             "Organize files directly inside this folder?\n\n"
