@@ -318,6 +318,38 @@ class MainWindow(QMainWindow):
             self.label.setText("Choose a folder first.")
             return
 
+        answer = QMessageBox.quesion(
+            self,
+            "Organize files",
+            "Organize files directly inside this folder?\n\n"
+            f"{self.selected_directory}\n\n"
+            "Files will be moved into text_files subfolders.",
+            QMessageBox.StandardButton.Yes
+            | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+
+        if answer != QMessageBox.StandardButton.Yes:
+            self.label.setText("Cancelled. No files were moved.")
+        try:
+            moved, errors = organizer(self.selected_directory)
+        except (OSError, ValueError) as error:
+            self.label.setText(f"Could not organize folder: {error}")
+            return
+
+
+        if errors:
+            self.label.setText(
+                f"Moved {moved} files, but some errors occurred"
+            )
+            QMessageBox.warning(
+                self,
+                "Organizer errors",
+                "\n".join(errors[:5])
+            )
+        else:
+            self.label.setText(f"Organized {moved} files")
+
         # Connect the organizer function here when it is ready.
         self.label.setText(
             f"Ready to organize: {self.selected_directory}"
