@@ -2,7 +2,7 @@ A python file organiser that can organise a directory
 see second part for Week2 
 
 
-#Week1
+# Week1
 
 text_files folder  was the directory used with inside of it some different types of files including some files to ignore by the code such as the history.md file that is used to track last saved  progress and the devlog drafts of this projects and my ideas as they come
 
@@ -40,7 +40,7 @@ https://customtkinter.tomschimansky.com/tutorial/grid-system/
 
 
 
-#Week2: 
+# Week2: 
 
 made most of the ui but separatly:
 made the framless code that makes the actual window looks smart (less.py)
