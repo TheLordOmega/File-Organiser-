@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 
 from PySide6.QtCore import QEvent, QSize, Qt
-from PySide6.QtGui import QAction, QIcon
+from PySide6.QtGui import QAction, QIcon, QCursor
 from PySide6.QtWidgets import (
     QApplication,
     QButtonGroup,
@@ -331,6 +331,7 @@ class MainWindow(QMainWindow):
 
         if answer != QMessageBox.StandardButton.Yes:
             self.label.setText("Cancelled. No files were moved.")
+            return
         try:
             moved, errors = organizer(self.selected_directory)
         except (OSError, ValueError) as error:
@@ -356,21 +357,19 @@ class MainWindow(QMainWindow):
         )
 
     def show_context_menu(self, pos):
-        context = QMenu(self)
-        choose_action = QAction("Choose folder…", self)
-        clear_action = QAction("Clear selected folder", self)
-        context.addAction(choose_action)
-        context.addAction(clear_action)
+       context = QMenu(self)
 
-        selected_action = context.exec(
-            self.centralWidget().mapToGlobal(pos)
-        )
+       choose_action = context.addAction("Choose folder…")
+       clear_action = context.addAction("Clear selected folder")
 
-        if selected_action == choose_action:
-            self.choose_folder()
-        elif selected_action == clear_action:
-            self.selected_directory = ""
-            self.label.setText("Choose a folder to start.")
+       # QCursor.pos() is already a global screen position.
+       selected_action = context.exec(QCursor.pos())
+
+       if selected_action == choose_action:
+           self.choose_folder()
+       elif selected_action == clear_action:
+           self.selected_directory = ""
+           self.label.setText("Choose a folder to start.")
 
     def changeEvent(self, event):
         super().changeEvent(event)
@@ -382,8 +381,7 @@ class MainWindow(QMainWindow):
             self.title_bar.update_window_state()
 
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+sys.exit(app.exec())
