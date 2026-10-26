@@ -18,23 +18,35 @@ from PySide6.QtWidgets import (
     QStackedWidget
 )
 
+from e import controls_layout
+
 
 #code to customise the titlebar
 class CustomTitleBar(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
         self.setFixedHeight(50)
+        self._drag_offet = None
 
-        self.initial_pos = None
         titlela = QHBoxLayout(self)
-        titlela.setContentsMargins(1, 1, 1, 1)
-        titlela.setSpacing(2)
+        titlela.setContentsMargins(8, 4, 8,4 )
+        titlela.setSpacing(0)
+            #spacer to keep things centered
+        left_spacer = QWidget(self)
+        left_spacer.setFixedWidth(132)
+        titlela.addWidget(left_spacer)
+
         # Title label
         self.title = QLabel(parent.windowTitle(), self)
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.title.setAttribute(
             Qt.WidgetAttribute.WA_TransparentForMouseEvents
         )
+        parent.windowTitleChanged.connect(self.title.setText)
+        titlela.addWidget(self.title, 1)
+
+
+
         self.title.setStyleSheet(
             """
             QLabel {
@@ -46,7 +58,13 @@ class CustomTitleBar(QWidget):
         """
         )
 
-        titlela.addWidget(self.title, 1)
+        controls = QWidget(self)
+        controls.setFixedWidth(132)
+        controls_layout = QHBoxLayout(controls)
+        controls_layout.setContentsMargins( 0,0 , 0, 0)
+        controls_layout.setSpacing(4)
+
+
         # Minimize button
         self.min_button = QToolButton(self)
         min_icon = QIcon()
@@ -123,7 +141,13 @@ class CustomTitleBar(QWidget):
             if handle is not None and handle.startSystemMove():
                 event.accept()
                 return
-
+                # Fallback for platforms that do not support startSystemMove().
+                self._drag_offset = (
+                    event.globalPosition().toPoint()
+                    - self.window().frameGeometry().topLeft()
+                )
+                event.accept()
+                return
         super().mousePressEvent(event)
 
 
