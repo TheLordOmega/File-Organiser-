@@ -163,10 +163,26 @@ class MainWindow(QMainWindow):
             navila.addWidget(button)
 
 
+    self.pages = QStackedWidget()
+
+    clean_page = QWidget()
+    cleanla = QVBoxLayout(clean_page)
+    cleanla.addWidget(QLabel("File Organiser"))
 
 
+    self.label = QLabel("choose a folder to start")
+    cleanla.addWidget(self.button)
 
+    self.pages.addWidget(clean_page)
 
+    for name in page_name[1:]:
+        page = QWidget()
+        pagela = QVBoxLayout(page)
+        pagela.addWidget(QLabel(f"{name} later"))
+        self.pages.addWidget(page)
+
+    self.nav_group.idClicked.connect(self.pages.setCurrentIndex)
+    self.nav_group.button(0).setChecked(True)
 
 
 
@@ -218,7 +234,7 @@ class MainWindow(QMainWindow):
 
 
     def button_clicked(self):
-        self.setWindowTitle("Done!")
+        ##organiser
 
 #######mouse presses tracking
     def mousePressEvent(self, e):
