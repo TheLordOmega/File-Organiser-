@@ -142,12 +142,32 @@ class MainWindow(QMainWindow):
         page_names =["Clean", "Optimize", "History", "Settings"]
 
 
+        self.naviwi = QWidget()
+        self.naviwi.setObjectName("NavBar")
+        self.naviwi.setFixedHeight(56)
 
+
+        navila = QHBoxLayout(self.naviwi)
+        navila.setContentsMargins(8,6,8,6)
+        navila.setSpacing(4)
+        navila.addStretch(1)
+
+        self.nav_group = QButtonGroup(self)
+        self.nav_group.setExclusive(True)
+
+
+
+
+
+
+
+        central_widget = QWidget()
         central_widget.setObjectName("Container")
+        central_widget.set(Qt.WidgetAttribute.WA_StyledBackground, True)
         central_widget.setStyleSheet(
             """#Container{
                     background: qlineargradient(x1:0 y1:0, x2:1 y2:1, stop:0 #051c2a stop:1 #44315f);
-                    border-radius: 5px;
+                    border-radius: 16px;
             }
 
             """
