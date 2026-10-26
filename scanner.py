@@ -1,4 +1,7 @@
-from config import blacklist, date, directory, text_folder, topics
+from datetime import datetime
+from pathlib import Path
+
+from config import blacklist, load_last_run, save_last_run, text_folder, topics
 
 for file in directory.iterdir():
     if (

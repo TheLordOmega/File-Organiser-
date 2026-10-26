@@ -1,6 +1,7 @@
 import argparse
 from datetime import datetime
 from pathlib import Path
+from config import load_last_run
 
 
 from config import directory, history_file
@@ -9,7 +10,7 @@ from pdf import extract_pdf, clean_markdown
 
 
 def main():
-    cutoff =
+    cutoff = load_last_run(folder)
 
     scan_time = datetime.now()
 

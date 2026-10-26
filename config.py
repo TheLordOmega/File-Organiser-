@@ -1,6 +1,5 @@
-from pathlib import Path
 from datetime import datetime
-
+from pathlib import Path
 
 directory = Path.cwd()
 
@@ -33,14 +32,27 @@ topics = {
     "maths": ["calculus", "algebra", "maths"],
 }
 
+def history_path(folder):
+    return Path(folder)/ history_file
 
-if history_file.exists() and history_file.read_text(encoding="utf-8").strip():
-    last_line = history_file.read_text(encoding="utf-8").strip().split("\n")[-1]
-    print(f"Last line: {last_line}")
-    date = datetime.strptime(last_line, "%Y-%m-%d %H:%M")
-else:
-    date = datetime.strptime(input("Enter a date (YYYY-MM-DD HH:MM): "), "%Y-%m-%d %H:%M")
+def load_last_run(folder):
+    path = history_path(folder)
+
+    if not path.exists():
+        return None
+
+    lines= path.read_text(encoding="utf-8").splitlines()
+
+    for line in reversed(lines):
+        line = line.strip()
+        if line:
+            return datetime.fromisoformat(line)
+    return None
 
 
-with open(history_file, "a", encoding="utf-8") as f:
-    f.write(date.now().strftime("%Y-%m-%d %H:%M") + "\n")
+def save_last_run(folder):
+    path = history_path(folder)
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    with path.open( "a", encoding = "utf-8") as history:
+        history.write(datetime.now().isoformat(timespec="seconds") +"\n")
