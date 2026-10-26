@@ -2,6 +2,7 @@ import code
 import time
 
 from PySide6.QtCore import QTimer, Slot, QRunnable, QThreadPool
+from PySide6.QtCore import QObject, Signal
 from PySide6.QtWidgets import(
     QApplication,
     QLabel,
@@ -78,7 +79,36 @@ class Worker(QRunnable):
         """Initialise the runner function with passed args, kwargs"""
         self.fn(*self.args, **self.kwargs)
 
+        try:
+            result = self.fn(*self.args, **self.kwargs)
+        except Exception:
+            traceback.print_exc()
+            exctype, value = sys.exc_info()[:2]
+            self.signals.error.emit((exctype, value, traceback.format_exc()))
+        else:
+            self.signals.result.emit(result)
+        finally:
+            self.signals.finished.emit(self.thread_id)
 
+
+class WorkerSignals(QObject):
+    """signals from a running worker thread.
+
+    finished
+        int thread_id
+    error
+        tuple(exctype, value, traceback.format_exc())
+    result
+        object data returned from processing, anything
+    progress
+        tuple(thread_id, progress_value)
+
+    """
+
+    finished= Signal(int)
+    error = Signal(tuple)
+    result = Signal(object)
+    progress = Signal(tuple)
 
 
 app = QApplication()

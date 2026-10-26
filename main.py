@@ -1,26 +1,37 @@
 import argparse
-from datetime import datetime
 from pathlib import Path
-from config import load_last_run
 
-
-from config import directory, history_file
 from scanner import organizer
-from pdf import extract_pdf, clean_markdown
 
 
 def main():
-    cutoff = load_last_run(folder)
-
-    scan_time = datetime.now()
-
-    moved,errors = organize(
-        directory,
-        cutoff,
+    parser = argparse.ArgumentParser(
+        description="Organize files in a folder by topic and file type."
     )
+    parser.add_argument(
+        "folder",
+        nargs="?",
+        default=".",
+        help="Folder to organize (default: current directory).",
+    )
+    args = parser.parse_args()
 
-    if errors == 0:
-        save_cutoff(scan_time)
-        print("History updated.")
-    else:
-        print("files failes, History not updated")
+    folder = Path(args.folder).expanduser().resolve()
+    if not folder.is_dir():
+        parser.error(f"not a folder: {folder}")
+
+    print(f"Organizing files in: {folder}")
+    moved, errors = organizer(folder)
+
+    if errors:
+        print(f"Finished with {len(errors)} error(s); moved {moved} file(s):")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+
+    print(f"Finished. Moved {moved} file(s).")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
